@@ -21,7 +21,7 @@ export default function Home() {
     try {
       const parsed = await parseExcelFile(file)
       if (parsed.length === 0) {
-        setError('No valid rows found. Make sure columns title, value, and type exist.')
+        setError('ردیف معتبری پیدا نشد. مطمئن شوید ستون‌های title، value و type وجود دارند.')
         setLoading(false)
         return
       }
@@ -31,7 +31,7 @@ export default function Home() {
       setLastUpdated(new Date())
       fileRef.current = file
     } catch (err) {
-      setError('Could not parse file. Check that it is a valid .xlsx, .xls, or .csv.')
+      setError('فایل قابل خواندن نیست. مطمئن شوید فایل xlsx، xls یا csv معتبر است.')
       console.error(err)
     }
     setLoading(false)
@@ -53,19 +53,18 @@ export default function Home() {
 
   const hasDashboard = cards.length > 0
 
-  // Card counter across groups
   let cardIndex = 0
 
   return (
     <>
       <Head>
-        <title>{fileName ? `${fileName} — Exec Dashboard` : 'Exec Dashboard'}</title>
+        <title>{fileName ? `${fileName} — داشبورد مدیریتی` : 'داشبورد مدیریتی'}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Minimal executive operations dashboard" />
+        <meta name="description" content="داشبورد مدیریتی" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%230a0a0a'/><text y='72' x='50' text-anchor='middle' font-size='60' fill='white'>⬛</text></svg>" />
       </Head>
 
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white" dir="rtl">
         {hasDashboard && (
           <Header
             lastUpdated={lastUpdated}
@@ -81,7 +80,7 @@ export default function Home() {
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="flex flex-col items-center gap-4">
                 <div className="w-5 h-5 border border-gray-200 border-t-gray-600 rounded-full animate-spin" />
-                <p className="text-xs text-gray-400 tracking-widest uppercase">Parsing file…</p>
+                <p className="text-xs text-gray-400 tracking-widest">در حال پردازش فایل...</p>
               </div>
             </div>
           )}
@@ -94,7 +93,7 @@ export default function Home() {
                   onClick={handleReset}
                   className="text-xs text-gray-400 underline hover:text-gray-700 transition-colors"
                 >
-                  Try again
+                  تلاش مجدد
                 </button>
               </div>
             </div>
@@ -110,13 +109,13 @@ export default function Home() {
                 <section key={group.name || '__ungrouped__'} className="mb-10">
                   {group.name && (
                     <div className="flex items-center gap-4 mb-5">
-                      <h2 className="text-xs tracking-[0.2em] uppercase font-medium text-gray-400">
-                        {group.name}
-                      </h2>
-                      <div className="flex-1 h-px bg-gray-100" />
                       <span className="text-xs text-gray-300 tabular-nums">
                         {group.cards.length}
                       </span>
+                      <div className="flex-1 h-px bg-gray-100" />
+                      <h2 className="text-xs tracking-[0.2em] uppercase font-medium text-gray-400">
+                        {group.name}
+                      </h2>
                     </div>
                   )}
 
@@ -144,15 +143,14 @@ export default function Home() {
                 </section>
               ))}
 
-              {/* Footer */}
               <footer className="mt-16 pb-10 flex items-center justify-between border-t border-gray-50 pt-6">
-                <p className="text-xs text-gray-300">{cards.length} indicators</p>
                 <p className="text-xs text-gray-300 font-mono">
-                  {lastUpdated?.toLocaleString([], {
+                  {lastUpdated?.toLocaleString('fa-IR', {
                     dateStyle: 'medium',
                     timeStyle: 'short',
                   })}
                 </p>
+                <p className="text-xs text-gray-300">{cards.length} شاخص</p>
               </footer>
             </div>
           )}

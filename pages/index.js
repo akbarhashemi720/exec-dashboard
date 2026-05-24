@@ -105,18 +105,15 @@ export default function Home() {
                     <div className="flex items-center gap-4 mb-5" style={{ direction: 'rtl' }}>
                       <h2
                         style={{
-                          fontSize: '0.75rem',
-                          fontWeight: '500',
-                          color: '#9ca3af',
+                          fontSize: '1.1rem',
+                          fontWeight: '600',
+                          color: '#111827',
                           whiteSpace: 'nowrap',
                         }}
                       >
                         {group.name}
                       </h2>
                       <div className="flex-1 h-px bg-gray-100" />
-                      <span style={{ fontSize: '0.75rem', color: '#d1d5db' }}>
-                        {group.cards.length}
-                      </span>
                     </div>
                   )}
 

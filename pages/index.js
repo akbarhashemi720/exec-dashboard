@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { parseExcelFile, groupCards } from '../utils/parseExcel'
 import KPICard from '../components/KPICard'
 import UploadZone from '../components/UploadZone'
@@ -38,9 +38,7 @@ export default function Home() {
   }, [])
 
   const handleRefresh = useCallback(() => {
-    if (fileRef.current) {
-      processFile(fileRef.current)
-    }
+    if (fileRef.current) processFile(fileRef.current)
   }, [processFile])
 
   const handleReset = useCallback(() => {
@@ -52,7 +50,6 @@ export default function Home() {
   }, [])
 
   const hasDashboard = cards.length > 0
-
   let cardIndex = 0
 
   return (
@@ -80,7 +77,7 @@ export default function Home() {
             <div className="flex items-center justify-center min-h-[60vh]">
               <div className="flex flex-col items-center gap-4">
                 <div className="w-5 h-5 border border-gray-200 border-t-gray-600 rounded-full animate-spin" />
-                <p className="text-xs text-gray-400 tracking-widest">در حال پردازش فایل...</p>
+                <p className="text-xs text-gray-400">در حال پردازش فایل...</p>
               </div>
             </div>
           )}
@@ -89,10 +86,7 @@ export default function Home() {
             <div className="flex items-center justify-center min-h-[60vh] px-6">
               <div className="max-w-sm text-center">
                 <p className="text-sm text-red-500 mb-4">{error}</p>
-                <button
-                  onClick={handleReset}
-                  className="text-xs text-gray-400 underline hover:text-gray-700 transition-colors"
-                >
+                <button onClick={handleReset} className="text-xs text-gray-400 underline hover:text-gray-700 transition-colors">
                   تلاش مجدد
                 </button>
               </div>
@@ -108,21 +102,28 @@ export default function Home() {
               {groups.map((group) => (
                 <section key={group.name || '__ungrouped__'} className="mb-10">
                   {group.name && (
-                    <div className="flex items-center gap-4 mb-5">
-                      <span className="text-xs text-gray-300 tabular-nums">
-                        {group.cards.length}
-                      </span>
-                      <div className="flex-1 h-px bg-gray-100" />
-                      <h2 className="text-xs tracking-[0.2em] uppercase font-medium text-gray-400">
+                    <div className="flex items-center gap-4 mb-5" style={{ direction: 'rtl' }}>
+                      <h2
+                        style={{
+                          fontSize: '0.75rem',
+                          fontWeight: '500',
+                          color: '#9ca3af',
+                          whiteSpace: 'nowrap',
+                        }}
+                      >
                         {group.name}
                       </h2>
+                      <div className="flex-1 h-px bg-gray-100" />
+                      <span style={{ fontSize: '0.75rem', color: '#d1d5db' }}>
+                        {group.cards.length}
+                      </span>
                     </div>
                   )}
 
                   <div
                     className="grid gap-3"
                     style={{
-                      gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
+                      gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
                     }}
                   >
                     {group.cards.map((card) => {

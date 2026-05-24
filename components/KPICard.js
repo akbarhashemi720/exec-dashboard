@@ -4,7 +4,7 @@ const TYPE_FORMATS = {
   currency: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
     if (isNaN(n)) return v
-    return n.toLocaleString('fa-IR') + ' ﷼'
+    return n.toLocaleString('fa-IR')
   },
   percent: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))

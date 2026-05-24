@@ -4,7 +4,7 @@ const TYPE_FORMATS = {
   currency: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
     if (isNaN(n)) return v
-    return n.toLocaleString('fa-IR') + ' ریال'
+    return n.toLocaleString('fa-IR') + ' ﷼'
   },
   percent: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
@@ -56,20 +56,23 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
         backgroundColor: colorScheme ? colorScheme.bg : '#ffffff',
         animationDelay: `${index * 40}ms`,
         direction: 'rtl',
-        minHeight: '200px',
-        padding: '2rem 1.5rem',
+        minHeight: '180px',
+        padding: '1.5rem 1rem',
       }}
     >
-      <p className="text-xs font-medium text-gray-400 mb-4 text-center">
+      <p style={{ fontSize: '0.7rem', color: '#9ca3af', marginBottom: '0.75rem', textAlign: 'center' }}>
         {title}
       </p>
 
       <span
-        className="font-light leading-none text-center"
         style={{
-          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          fontSize: 'clamp(1.2rem, 2.5vw, 2rem)',
           color: colorScheme ? colorScheme.dot : '#0a0a0a',
           fontFamily: 'var(--font-mono)',
+          fontWeight: '300',
+          textAlign: 'center',
+          lineHeight: '1.3',
+          wordBreak: 'break-word',
         }}
       >
         {formatted}

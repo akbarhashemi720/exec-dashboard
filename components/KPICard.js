@@ -65,7 +65,7 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
             style={{ backgroundColor: colorScheme.dot }}
           />
         )}
-        <p className="text-xs font-medium tracking-widest uppercase text-gray-400 truncate">
+        <p className="text-sm font-medium text-gray-400 truncate">
           {title}
         </p>
       </div>
@@ -74,7 +74,7 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
         <span
           className="font-light leading-none"
           style={{
-            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+            fontSize: 'clamp(2rem, 4vw, 3.5rem)',
             letterSpacing: '0',
             color: colorScheme ? colorScheme.dot : '#0a0a0a',
             fontFamily: 'var(--font-mono)',

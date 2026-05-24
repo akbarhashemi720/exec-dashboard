@@ -49,46 +49,31 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
 
   return (
     <div
-      className={`card-appear rounded-lg border p-6 flex flex-col gap-2 transition-all duration-200 hover:shadow-sm`}
+      className="card-appear rounded-lg border flex flex-col items-center justify-center transition-all duration-200 hover:shadow-sm"
       style={{
         opacity: visible ? 1 : 0,
         borderColor: colorScheme ? colorScheme.border : '#e5e7eb',
         backgroundColor: colorScheme ? colorScheme.bg : '#ffffff',
         animationDelay: `${index * 40}ms`,
         direction: 'rtl',
+        minHeight: '200px',
+        padding: '2rem 1.5rem',
       }}
     >
-      <div className="flex items-center gap-2">
-        {colorScheme && (
-          <span
-            className="inline-block w-2 h-2 rounded-full flex-shrink-0"
-            style={{ backgroundColor: colorScheme.dot }}
-          />
-        )}
-        <p className="text-sm font-medium text-gray-400 truncate">
-          {title}
-        </p>
-      </div>
+      <p className="text-xs font-medium text-gray-400 mb-4 text-center">
+        {title}
+      </p>
 
-      <div className="mt-1">
-        <span
-          className="font-light leading-none"
-          style={{
-            fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-            letterSpacing: '0',
-            color: colorScheme ? colorScheme.dot : '#0a0a0a',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
-          {formatted}
-        </span>
-      </div>
-
-      {subtitle && (
-        <p className="text-xs text-gray-400 font-light mt-1 leading-relaxed">
-          {subtitle}
-        </p>
-      )}
+      <span
+        className="font-light leading-none text-center"
+        style={{
+          fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+          color: colorScheme ? colorScheme.dot : '#0a0a0a',
+          fontFamily: 'var(--font-mono)',
+        }}
+      >
+        {formatted}
+      </span>
     </div>
   )
 }

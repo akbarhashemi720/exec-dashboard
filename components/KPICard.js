@@ -4,23 +4,17 @@ const TYPE_FORMATS = {
   currency: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
     if (isNaN(n)) return v
-    if (Math.abs(n) >= 1_000_000_000) return `$${(n / 1_000_000_000).toFixed(1)}B`
-    if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toFixed(1)}M`
-    if (Math.abs(n) >= 1_000) return `$${(n / 1_000).toFixed(0)}K`
-    return `$${n.toLocaleString()}`
+    return n.toLocaleString('fa-IR') + ' ریال'
   },
   percent: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
     if (isNaN(n)) return v
-    return `${n}%`
+    return `${n}٪`
   },
   number: (v) => {
     const n = parseFloat(String(v).replace(/[^0-9.-]/g, ''))
     if (isNaN(n)) return v
-    if (Math.abs(n) >= 1_000_000_000) return `${(n / 1_000_000_000).toFixed(1)}B`
-    if (Math.abs(n) >= 1_000_000) return `${(n / 1_000_000).toFixed(1)}M`
-    if (Math.abs(n) >= 1_000) return `${(n / 1_000).toFixed(0)}K`
-    return n.toLocaleString()
+    return n.toLocaleString('fa-IR')
   },
   text: (v) => String(v),
   time: (v) => String(v),
@@ -53,13 +47,6 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
   const colorScheme = color ? COLOR_MAP[color.toLowerCase()] : null
   const formatted = formatValue(value, type)
 
-  const cardStyle = colorScheme
-    ? {
-        backgroundColor: colorScheme.bg,
-        borderColor: colorScheme.border,
-      }
-    : {}
-
   return (
     <div
       className={`card-appear rounded-lg border p-6 flex flex-col gap-2 transition-all duration-200 hover:shadow-sm`}
@@ -68,9 +55,9 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
         borderColor: colorScheme ? colorScheme.border : '#e5e7eb',
         backgroundColor: colorScheme ? colorScheme.bg : '#ffffff',
         animationDelay: `${index * 40}ms`,
+        direction: 'rtl',
       }}
     >
-      {/* Color dot + title */}
       <div className="flex items-center gap-2">
         {colorScheme && (
           <span
@@ -83,13 +70,12 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
         </p>
       </div>
 
-      {/* Value */}
       <div className="mt-1">
         <span
           className="font-light leading-none"
           style={{
-            fontSize: 'clamp(2rem, 4vw, 3.25rem)',
-            letterSpacing: '-0.02em',
+            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+            letterSpacing: '0',
             color: colorScheme ? colorScheme.dot : '#0a0a0a',
             fontFamily: 'var(--font-mono)',
           }}
@@ -98,7 +84,6 @@ export default function KPICard({ title, value, type, subtitle, color, index }) 
         </span>
       </div>
 
-      {/* Subtitle */}
       {subtitle && (
         <p className="text-xs text-gray-400 font-light mt-1 leading-relaxed">
           {subtitle}
